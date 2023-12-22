@@ -1,0 +1,54 @@
+@startuml C4codigo
+
+class Application << Singleton >> << Agent >> << Supervisor >>
+class ClienteDir << Singleton >> << GenServer >>
+class AdminDir << Singleton >> << GenServer >>
+class AnadirCesta << GenServer >>
+class CancelarCesta << GenServer >>
+class ComprarCesta << GenServer >>
+class VerCesta << GenServer >>
+class VerCatalog << GenServer >>
+class EliminarCesta << GenServer >>
+class EditarElem << GenServer >>
+class EliminarCatalog << GenServer >>
+class AnadirCatalog << GenServer >>
+
+Application ..> ClienteDir
+Application ..> AdminDir
+AdminDir ..> AnadirCatalog
+AdminDir ..> EditarElem
+AdminDir ..> EliminarCatalog
+AdminDir ..> VerCatalog
+ClienteDir ..> VerCatalog
+ClienteDir ..> AnadirCesta
+ClienteDir ..> CancelarCesta
+ClienteDir ..> ComprarCesta
+ClienteDir ..> EliminarCesta
+ClienteDir ..> VerCesta
+AnadirCatalog ..> Products
+EditarElem ..> Products
+EliminarCatalog ..> Products
+AnadirCesta ..> Products
+ComprarCesta ..> Products
+VerCatalog ..> Products
+
+Application : start(_type, _args)
+ClienteDir : ver_catalogo()
+ClienteDir : ver_catalogo(limit)
+ClienteDir : ver_cesta(pid)
+ClienteDir : anadir_cesta(element_id, units, pid)
+ClienteDir : eliminar_cesta(element_id, units, pid)
+ClienteDir : comprar_cesta(pid)
+ClienteDir : cancelar_cesta(pid)
+AdminDir : ver_catalogo()
+AdminDir : ver_catalogo(limit)
+AdminDir : anadir_elemento(params)
+AdminDir : eliminar_elemento(element_id)
+AdminDir : editar_elemento(element_id, params)
+Products : add_element(element)
+Products : edit_element(element_id, new_element)
+Products : delete_element(element_id)
+Products : get_product_by_id(element_id)
+Products : get_catalog_data(num_elements)
+Products : get_catalog_data_admin(num_elements)
+@enduml

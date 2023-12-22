@@ -1,0 +1,13 @@
+@startuml C4contexto
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+
+Person(cliente, "Cliente", "Quiere hacer uso del sistema")
+Person(admin, "Administrador", "Se encarga de mantener actualizado el inventario")
+System_Ext(aliasServidor, "Sistema cliente-servidor", "Publica el API para los clientes y administradores y redirige las peticiones a los servicios accesibles para cada uno")
+
+Rel(cliente, aliasServidor, "Envía", "petición")
+Rel(aliasServidor, cliente, "Devuelve", "respuesta")
+Rel(admin, aliasServidor, "Envía", "petición")
+Rel(aliasServidor, admin, "Devuelve", "respuesta")
+@enduml

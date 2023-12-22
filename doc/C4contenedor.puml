@@ -1,0 +1,24 @@
+@startuml C4contenedor
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+
+Person(cliente, "Cliente", "Quiere hacer uso del sistema")
+Person(admin, "Administrador", "Se encarga de mantener actualizado el inventario")
+System_Boundary(sistema, "Sistema cliente-servidor") {
+    Component(dirCliente, "Directorio clientes", "Publica el API para los clientes y redirige las peticiones a los servicios accesibles para los clientes")
+    Component(dirAdmin, "Directorio administradores", "Publica el API para los administradores del sistema y redirige las peticiones a los servicios accesibles para los administradores")
+    Component(servCliente, "Servicios clientes", "Servicios disponibles para los clientes")
+    Component(servAdmin, "Servicios administradores", "Servicios disponibles para los administradores")
+}
+
+Rel(cliente, dirCliente, "Envía", "petición")
+Rel(dirCliente, cliente, "Devuelve", "respuesta")
+Rel(admin, dirAdmin, "Envía", "petición")
+Rel(dirAdmin, admin, "Devuelve", "respuesta")
+
+Rel(dirCliente, servCliente, "Redirige", "petición")
+Rel(servCliente, dirCliente, "Responde", "resultado")
+
+Rel(dirAdmin, servAdmin, "Redirige", "petición")
+Rel(servAdmin, dirAdmin, "Responde", "resultado")
+@enduml
