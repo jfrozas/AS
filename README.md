@@ -1,5 +1,13 @@
 # Requisitos FIC_SPORTS
 
+Hecho por:
+
+- Javier Fernández 
+- Marcos Díaz
+- Guillermo Fernández
+- Pablo Páramo
+- David García
+
 El proyecto consiste en una aplicación de una **tienda de venta de productos deportivos**. </br>
 La aplicación será accesible tanto por clientes como por administradores.
 Los primeros podrán, entre otras acciones, ver el catálogo, añadir elementos a su cesta, eliminar elementos de esta o comprarla.
